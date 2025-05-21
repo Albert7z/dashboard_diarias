@@ -1,0 +1,9 @@
+/* Hide the "Aa" (toggle case sensitivity) button in DataTable filters */
+.dash-filter--case {
+    display: none !important;
+}
+
+/* Esconde a linha da tabela que contém células de filtro */
+tr:has(th.dash-filter) {
+    display: none !important;
+}
