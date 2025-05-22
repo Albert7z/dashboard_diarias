@@ -25,7 +25,7 @@ def encurtar_nome_entidade(nome):
 # --- Carregamento e Limpeza dos Dados ---
 def carregar_dados():
     try:
-        df = pd.read_csv('dashboard_diarias/Relatorio.csv', sep=';', encoding='latin1')
+        df = pd.read_csv('Relatorio.csv', sep=';', encoding='latin1')
         df.columns = ['Entidade', 'Credor', 'Cargo', 'Especie', 'Empenho', 'Emissao', 
                       'Valor_Transporte', 'Valor_Diarias']
 
