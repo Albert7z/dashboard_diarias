@@ -16,3 +16,12 @@ tr:has(th.dash-filter) {
     padding-bottom: 8px !important;
     word-break: break-word; /* Força a quebra de palavras longas se necessário */
 }
+
+/* Ajustar o container do dropdown para telas pequenas */
+@media (max-width: 768px) { /* Aplica para telas com largura máxima de 768px (típico de mobile) */
+    filtro-entidade .Select-menu-outer { /*  #filtro-entidade é o ID do seu dropdown */
+        min-width: 250px; /* Garante uma largura mínima para o menu aberto */
+        font-size: 0.9em; /* Reduz um pouco o tamanho da fonte no mobile */
+    }
+
+}
