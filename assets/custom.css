@@ -7,3 +7,12 @@
 tr:has(th.dash-filter) {
     display: none !important;
 }
+
+/* Melhorar a legibilidade do texto no dropdown e evitar quebra estranha */
+.Select-menu-outer .Select-option {
+    white-space: normal !important; /* Permite que o texto quebre em várias linhas */
+    line-height: 1.4em !important;   /* Ajusta a altura da linha para melhor leitura */
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    word-break: break-word; /* Força a quebra de palavras longas se necessário */
+}
