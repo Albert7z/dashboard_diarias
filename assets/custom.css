@@ -3,25 +3,27 @@
     display: none !important;
 }
 
-/* Esconde a linha da tabela que contém células de filtro */
-tr:has(th.dash-filter) {
+/* Hide the "Aa" (toggle case sensitivity) button in DataTable filters */
+.dash-filter--case {
     display: none !important;
 }
 
-/* Melhorar a legibilidade do texto no dropdown e evitar quebra estranha */
-.Select-menu-outer .Select-option {
-    white-space: normal !important; /* Permite que o texto quebre em várias linhas */
-    line-height: 1.4em !important;   /* Ajusta a altura da linha para melhor leitura */
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-    word-break: break-word; /* Força a quebra de palavras longas se necessário */
+/* Força quebra de linha nas opções do Dropdown */
+.Select__option {
+  white-space: normal !important;
+  word-break: break-word !important;
 }
 
-/* Ajustar o container do dropdown para telas pequenas */
-@media (max-width: 768px) { /* Aplica para telas com largura máxima de 768px (típico de mobile) */
-    filtro-entidade .Select-menu-outer { /*  #filtro-entidade é o ID do seu dropdown */
-        min-width: 250px; /* Garante uma largura mínima para o menu aberto */
-        font-size: 0.9em; /* Reduz um pouco o tamanho da fonte no mobile */
-    }
-
+/* Garante que o menu do Dropdown acomode bem textos longos */
+.Select__menu {
+  white-space: normal !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
 }
+
+.dropdown-ajustado div {
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+

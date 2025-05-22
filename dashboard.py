@@ -9,10 +9,23 @@ from dash import dash_table
 app = Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 server = app.server
 
+def encurtar_nome_entidade(nome):
+    substitucoes = {
+        'FUNDACAO MUNICIPAL DO MEIO AMBIENTE E DESENVOLVIMENTO SUSTENTAVEL': 'FUND. MEIO AMBIENTE',
+        'FUNDAÇÃO EDUCACIONAL DE SAO JOSE': 'FUND. EDUCACIONAL', 
+        'FUNDO MUNICIPAL DE ASSISTENCIA SOCIAL DE SAO JOSE': 'FUNDO ASSIST. SOCIAL',
+        'FUNDO MUNICIPAL DE SAÚDE DE SÃO JOSÉ': 'FUNDO SAÚDE',
+        'MUNICÍPIO DE SÃO JOSÉ': 'MUNICÍPIO',
+        'SAO JOSE PREVIDENCIA': 'PREVIDÊNCIA'
+    }
+    
+    return substitucoes.get(nome, nome)
+
+
 # --- Carregamento e Limpeza dos Dados ---
 def carregar_dados():
     try:
-        df = pd.read_csv('Relatorio.csv', sep=';', encoding='latin1')
+        df = pd.read_csv('dashboard_diarias/Relatorio.csv', sep=';', encoding='latin1')
         df.columns = ['Entidade', 'Credor', 'Cargo', 'Especie', 'Empenho', 'Emissao', 
                       'Valor_Transporte', 'Valor_Diarias']
 
@@ -24,6 +37,12 @@ def carregar_dados():
         df['Mes'] = df['Emissao'].dt.month
         df['Ano'] = df['Emissao'].dt.year
         df['Cargo'] = df['Cargo'].fillna('Não Especificado')
+        df['Entidade_Display'] = df['Entidade'].apply(encurtar_nome_entidade)
+        
+        return df
+    except Exception as e:
+        print(f"Erro ao carregar dados: {e}")
+        return pd.DataFrame()
         return df
     except Exception as e:
         print(f"Erro ao carregar dados: {e}")
@@ -78,10 +97,13 @@ app.layout = dbc.Container([
                     dcc.Dropdown(
                         id='filtro-entidade',
                         options=[{'label': 'Todas as Entidades', 'value': 'Todas'}] +
-                                [{'label': i, 'value': i} for i in sorted(df['Entidade'].unique())],
+                                [{'label': encurtar_nome_entidade(i), 'value': i} for i in sorted(df['Entidade'].unique())],
                         value='Todas',
                         className="mb-4",
-                        style={'color': '#333'}
+                        style={'color': '#333'},
+                        clearable=False,
+                        searchable=True,
+                        placeholder="Selecione uma entidade"
                     ),
                     html.Label("Intervalo de Meses:", className="mb-2 font-weight-bold"),
                     dcc.RangeSlider(
