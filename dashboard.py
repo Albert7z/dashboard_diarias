@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output
 import dash_bootstrap_components as dbc
 from dash import dash_table
+
 # --- Configurações Iniciais ---
 app = Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 server = app.server
@@ -11,7 +12,7 @@ server = app.server
 # --- Carregamento e Limpeza dos Dados ---
 def carregar_dados():
     try:
-        df = pd.read_csv('dashboard_diarias/Relatorio.csv', sep=';', encoding='latin1')
+        df = pd.read_csv('Relatorio.csv', sep=';', encoding='latin1')
         df.columns = ['Entidade', 'Credor', 'Cargo', 'Especie', 'Empenho', 'Emissao', 
                       'Valor_Transporte', 'Valor_Diarias']
 
