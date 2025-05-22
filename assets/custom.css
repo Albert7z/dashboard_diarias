@@ -8,6 +8,11 @@
     display: none !important;
 }
 
+/* Esconde a linha da tabela que contém células de filtro */
+tr:has(th.dash-filter) {
+    display: none !important;
+}
+
 /* Força quebra de linha nas opções do Dropdown */
 .Select__option {
   white-space: normal !important;
